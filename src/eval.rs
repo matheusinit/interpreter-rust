@@ -23,6 +23,9 @@ pub fn eval(term: Term) -> Val {
 
                 match (left, right) {
                     (Val::Int(a), Val::Int(b)) => Val::Int(a + b),
+                    (Val::Int(a), Val::Str(b)) => Val::Str(format!("{a}{b}")),
+                    (Val::Str(a), Val::Int(b)) => Val::Str(format!("{a}{b}")),
+                    (Val::Str(a), Val::Str(b)) => Val::Str(format!("{a}{b}")),
                     _ => panic!("Cannot add non-ints"),
                 }
             }
