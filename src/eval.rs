@@ -1,3 +1,4 @@
+use crate::structs::Operator;
 use crate::structs::Term;
 use crate::structs::Val;
 
@@ -15,5 +16,16 @@ pub fn eval(term: Term) -> Val {
             }
             Val::Void
         }
+        Term::Binary(binary) => match binary.op {
+            Operator::Add => {
+                let right: Val = eval(*binary.rhs);
+                let left = eval(*binary.lhs);
+
+                match (left, right) {
+                    (Val::Int(a), Val::Int(b)) => Val::Int(a + b),
+                    _ => panic!("Cannot add non-ints"),
+                }
+            }
+        },
     }
 }
