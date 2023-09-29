@@ -9,17 +9,31 @@ pub enum Val {
 }
 
 #[derive(Debug, Deserialize)]
+pub struct Bool {
+    pub value: bool,
+}
+
+#[derive(Debug, Deserialize)]
 #[serde(tag = "kind")]
 pub enum Term {
+    Bool(Bool),
     Int(Int),
     Print(Print),
     Str(Str),
     Binary(Binary),
+    If(If),
 }
 
 #[derive(Debug, Deserialize)]
 pub struct Print {
     pub value: Box<Term>,
+}
+
+#[derive(Debug, Deserialize)]
+pub struct If {
+    pub condition: Box<Term>,
+    pub otherwise: Box<Term>,
+    pub then: Box<Term>,
 }
 
 #[derive(Debug, Deserialize)]

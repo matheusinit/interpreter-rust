@@ -30,5 +30,15 @@ pub fn eval(term: Term) -> Val {
                 }
             }
         },
+        Term::If(statement) => {
+            let condition = eval(*statement.condition);
+
+            match condition {
+                Val::Bool(true) => eval(*statement.then),
+                Val::Bool(false) => eval(*statement.otherwise),
+                _ => panic!("Something wrong was put in condition for if statement"),
+            }
+        }
+        Term::Bool(bool) => Val::Bool(bool.value),
     }
 }
