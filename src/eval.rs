@@ -29,6 +29,15 @@ pub fn eval(term: Term) -> Val {
                     _ => panic!("Cannot add non-ints"),
                 }
             }
+            Operator::Sub => {
+                let right = eval(*binary.rhs);
+                let left = eval(*binary.lhs);
+
+                match (left, right) {
+                    (Val::Int(a), Val::Int(b)) => Val::Int(a - b),
+                    _ => panic!("Cannot sum non-ints"),
+                }
+            }
         },
         Term::If(statement) => {
             let condition = eval(*statement.condition);

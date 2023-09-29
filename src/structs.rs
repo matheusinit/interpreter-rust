@@ -46,6 +46,7 @@ pub struct Binary {
 #[derive(Debug, Deserialize)]
 pub enum Operator {
     Add,
+    Sub,
 }
 
 #[derive(Debug, Deserialize)]
